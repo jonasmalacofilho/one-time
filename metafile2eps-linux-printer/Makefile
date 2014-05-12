@@ -1,9 +1,10 @@
 NAME=Metafile to EPS Converter
 
 install:
+	service cups stop
 	cp "$(NAME).ppd" /etc/cups/ppd/
 	grep "$(NAME)" /etc/cups/printers.conf || cat "$(NAME).conf" | tee -a /etc/cups/printers.conf
-	service cups restart
+	service cups start
 
 uninstall:
 	echo "To uninstall, use your regular interface (GUI or not) to printer management"
