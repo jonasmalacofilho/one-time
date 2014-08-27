@@ -20,12 +20,12 @@ class SequenceSwitch {
         return switch (e.expr) {
             case ESwitch(expr, cases, def):
                 var ncases = [];
-                var prev:Expr = null;
+                var prev:Array<Expr> = null;
                 for (c in cases) {
                     var cur = switch (c.values) {
                         case [{ expr : EConst(CIdent("$next")), pos : pos }] if (prev != null):
                             switch (prev) {
-                                case { expr : EConst(CInt(i)) }:
+                                case [{ expr : EConst(CInt(i)) }]:
                                     var next = { expr : EConst(CInt(Std.string(Std.parseInt(i) + 1))), pos : pos };
                                     { values : [next], guard : c.guard, expr : c.expr };
                                 case _:
@@ -35,7 +35,7 @@ class SequenceSwitch {
                             c;
                     };
                     ncases.push(cur);
-                    prev = cur.values[0];
+                    prev = cur.values;
                 }
                 { expr : ESwitch(expr, ncases, def), pos : e.pos };
             case _:
