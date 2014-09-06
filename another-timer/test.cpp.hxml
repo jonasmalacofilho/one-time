@@ -1,0 +1,4 @@
+-cpp out/cpp
+-main Test
+-D HXCPP_MULTITHREADED
+
