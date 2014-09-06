@@ -1,0 +1,4 @@
+-cpp out/cpp
+-main Mark
+-D HXCPP_MULTITHREADED
+
